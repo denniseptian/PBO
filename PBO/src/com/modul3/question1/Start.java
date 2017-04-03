@@ -23,8 +23,7 @@ public class Start {
 				break;
 			case 3:
 				bukuTeks.meminjam(14, 03, 2017);
-				System.out.println("denda yang harus di bayar : "+bukuTeks.hitungDenda());
-				if(bukuTeks.hitungDenda() != 0){
+				if(bukuTeks.cekLamaPinjam() > 7){
 					System.out.println("Denda yang harus di bayar : "+bukuTeks.hitungDenda());
 				}else{
 					System.out.println("Peminjman tidak terkena denda.");

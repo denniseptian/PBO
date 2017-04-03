@@ -15,6 +15,8 @@ public class BukuTeks extends Buku implements Bisa_Dikopi, BisaDiPinjam {
 	private int tanggal;
 	private int bulan;
 	private int tahun;
+	private int jumlahDendaYangHarusDiBayar;
+	private int lamaPeminjaman;
 
 	public BukuTeks(String Penerbit, String Judul, String namaPengarang) {
 		setPenerbit(Penerbit);
@@ -70,30 +72,20 @@ public class BukuTeks extends Buku implements Bisa_Dikopi, BisaDiPinjam {
 
 	@Override
 	public int hitungDenda() {
-		Date date1 = null;
-		Date date2 = null;
-
-		try {
-			date1 = dateformat3.parse(getTanggal() + "/" + getBulan() + "/" + getTahun());
-			date2 = dateformat3.parse(getDate());
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+		
+		if (cekLamaPinjam() > 7) {
+			setJumlahDendaYangHarusDiBayar((cekLamaPinjam() - 7) * 5000);
+			System.out.println("Tanggal Meminjam : " + getTanggal()+"/"+getBulan()+"/"+getTahun());
+			try{
+				System.out.println("Tanggal Mengembalikan : " + dateformat3.format(dateformat3.parse(getDate())));
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+			System.out.println("Lama waktu peminjaman : " + getLamaPeminjaman() + " Hari");
 		}
 
-		int lamaPeminjaman = getCountDayBetween(date1, date2);
-
-		System.out.println("Tanggal Meminjam : " + dateformat3.format(date1));
-		System.out.println("Tanggal Mengembalikan : " + dateformat3.format(date2));
-		System.out.println("Lama waktu peminjaman : " + lamaPeminjaman + " Hari");
-
-		int jumlahDendaDiBayar = 0;
-
-		if (lamaPeminjaman > 7) {
-			jumlahDendaDiBayar = (lamaPeminjaman - 7) * 5000;
-		}
-
-		return jumlahDendaDiBayar;
+		return getJumlahDendaYangHarusDiBayar();
 	}
 
 	@Override
@@ -139,5 +131,36 @@ public class BukuTeks extends Buku implements Bisa_Dikopi, BisaDiPinjam {
 
 	public Date getDatePinjamBuku() {
 		return null;
+	}
+	public int getJumlahDendaYangHarusDiBayar() {
+		return jumlahDendaYangHarusDiBayar;
+	}
+
+	public void setJumlahDendaYangHarusDiBayar(int jumlahDendaYangHarusDiBayar) {
+		this.jumlahDendaYangHarusDiBayar = jumlahDendaYangHarusDiBayar;
+	}
+
+	public int getLamaPeminjaman() {
+		return lamaPeminjaman;
+	}
+
+	public void setLamaPeminjaman(int lamaPeminjaman) {
+		this.lamaPeminjaman = lamaPeminjaman;
+	}
+	public int cekLamaPinjam(){
+		Date date1 = null;
+		Date date2 = null;
+
+		try {
+			date1 = dateformat3.parse(getTanggal() + "/" + getBulan() + "/" + getTahun());
+			date2 = dateformat3.parse(getDate());
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+
+		setLamaPeminjaman(getCountDayBetween(date1, date2));
+		
+		return getLamaPeminjaman();
 	}
 }
