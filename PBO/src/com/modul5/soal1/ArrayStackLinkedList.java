@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class ArrayStackLinkedList {
 
 	public static void main(String[] args) {
-		LinkedList items = new LinkedList();
+		LinkedList<Integer> items = new LinkedList<Integer>();
 		
 		items.push(1);
 		items.push(2);

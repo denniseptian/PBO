@@ -3,9 +3,9 @@ package com.modul5.soal1;
 import java.util.ArrayList;
 
 public class StackArrayArrayList {
-	private int maxsize;
+	//private int maxsize;
 	private int top;
-	private ArrayList items = new ArrayList();
+	private ArrayList<Integer> items = new ArrayList<Integer>();
 	//private int[] items;
 
 	public void push(int item) {
@@ -24,6 +24,11 @@ public class StackArrayArrayList {
 	}
 
 	public static class ArrayStackException extends RuntimeException {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ArrayStackException(String message) {
 			super(message);
 		}

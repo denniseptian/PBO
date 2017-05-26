@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class DaftarBuku {
 	
 	public static void main(String args []){
-		Scanner scan = new Scanner(System.in);	
-		int infoBuku;
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Masukkan jumlah buku yang akan di input : ");
 		//infoBuku = scan.nextInt();
 		KelolaBuku[] kelolaBuku = new KelolaBuku[6];
@@ -53,5 +52,6 @@ public class DaftarBuku {
 			}else
 				break;
 		}
+		scan.close();
 	}
 }
